@@ -39,6 +39,7 @@ onLoad(() => {
     <XtxSwiper :list="bannerList" />
     <CategoryPanel :list="categoryList" />
     <HotPanel :list="hotList" />
+    <XtxGuess />
   </scroll-view>
 </template>
 
@@ -54,5 +55,3 @@ page {
   flex: 1;
 }
 </style>
-@/types/homeModels
-@/types/home

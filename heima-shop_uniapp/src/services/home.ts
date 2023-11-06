@@ -1,4 +1,5 @@
-import type { BannerItem, CategoryItem, HotItem } from '@/types/home';
+import type { PageParams, PageResult } from '@/types/global';
+import type { BannerItem, CategoryItem, HotItem, GuessItem } from '@/types/home';
 import { http } from '@/utils/http';
 
 export const getHomeBannerAPI = (distributionSite = 1) => {
@@ -24,3 +25,15 @@ export const getHomeHotAPI = () => {
     url: '/home/hot/mutli',
   });
 };
+
+// src/services/home.ts
+/**
+ * 猜你喜欢-小程序
+ */
+export const getHomeGoodsGuessLikeAPI = (data?: PageParams) => {
+  return http<PageResult<GuessItem>>({
+    method: 'GET',
+    url: '/home/goods/guessLike',
+    data,
+  })
+}
