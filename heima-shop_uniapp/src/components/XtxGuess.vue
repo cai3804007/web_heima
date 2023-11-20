@@ -1,18 +1,49 @@
 <script setup lang="ts">
 import { getHomeGoodsGuessLikeAPI } from '@/services/home';
+import type { PageParams } from '@/types/global';
 import type { GuessItem } from '@/types/home';
 import { onMounted, ref } from 'vue';
 const guessList = ref<GuessItem[]>([]);
 
+const pageParams: Required<PageParams> = {
+  page: 1,
+  pageSize: 10,
+}
+
+const finsh = ref(false);
+
 // 获取猜你喜欢列表数据
 const getHomeGoodsGuessLikeData = async () => {
-  const res = await getHomeGoodsGuessLikeAPI();
+  if (finsh.value) {
+    uni.showToast({
+      icon: 'none',
+      title: '没有更多数据了',
+    });
+    return;
+  }
+  pageParams.page++;
+  const res = await getHomeGoodsGuessLikeAPI(pageParams);
+  if (res.result.items.length < pageParams.pageSize) {
+    finsh.value = true;
+  }
   console.log(res);
-  guessList.value = res.result.items;
+  guessList.value.push(...res.result.items);
 }
+
+const restData = () => {
+  finsh.value = false;
+  guessList.value = [];
+  pageParams.page = 1;
+}
+
 // 组件挂载完毕
 onMounted(() => {
   getHomeGoodsGuessLikeData();
+})
+
+defineExpose({
+  getMore: getHomeGoodsGuessLikeData,
+  restData: restData,
 })
 
 </script>
@@ -25,14 +56,14 @@ onMounted(() => {
   <view class="guess">
     <navigator class="guess-item" v-for="item in guessList" :key="item.id" :url="`/pages/goods/goods?id=4007498`">
       <image class="image" mode="aspectFill" :src="item.picture"></image>
-      <view class="name">{{ item.discount }} </view>
+      <view class="name">{{ item.name }} </view>
       <view class="price">
         <text class="small">¥</text>
         <text>{{ item.price }}</text>
       </view>
     </navigator>
   </view>
-  <view class="loading-text"> 正在加载... </view>
+  <view class="loading-text"> {{ finsh ? '没有数据了' : '正在加载数据' }} </view>
 </template>
 
 <style lang="scss">
