@@ -1,10 +1,13 @@
 {
-	// 组件自动导入
+	// 组件自动引入规则
 	"easycom": {
+		// 是否开启自动扫描
 		"autoscan": true,
+		// 以正则方式自定义组件匹配规则
 		"custom": {
 			// uni-ui 规则如下配置
 			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+			// 以 Xtx 开头的组件，在 components 文件夹中查找引入（需要重启服务器）
 			"^Xtx(.*)": "@/components/Xtx$1.vue"
 		}
 	},
@@ -13,17 +16,15 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页",
 				"navigationStyle": "custom",
-				"backgroundColor": "#F7F7F7"
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{
-			"path": "pages/my/my",
+			"path": "pages/category/category",
 			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationBarTextStyle": "white",
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "商品分类"
 			}
 		},
 		{
@@ -33,9 +34,17 @@
 			}
 		},
 		{
-			"path": "pages/category/category",
+			"path": "pages/cart/cart2",
 			"style": {
-				"navigationBarTitleText": "分类"
+				"navigationBarTitleText": "购物车"
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "我的"
 			}
 		},
 		{
@@ -96,60 +105,79 @@
 			}
 		]
 	},
+	// 分包加载规则
 	"subPackages": [
 		{
-			"root": "pagesMember/settings",
+			// 子包的根目录
+			"root": "pagesMember",
+			// 页面路径和窗口表现
 			"pages": [
 				{
-					"path": "settings",
+					"path": "settings/settings",
 					"style": {
 						"navigationBarTitleText": "设置"
 					}
+				},
+				{
+					"path": "profile/profile",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "white",
+						"navigationBarTitleText": "个人信息"
+					}
+				},
+				{
+					"path": "address/address",
+					"style": {
+						"navigationBarTitleText": "地址管理"
+					}
+				},
+				{
+					"path": "address-form/address-form",
+					"style": {
+						"navigationBarTitleText": ""
+					}
 				}
 			]
 		},
 		{
-			"root": "pagesMember/profile",
+			"root": "pagesOrder",
 			"pages": [
 				{
-					"path": "profile",
+					"path": "create/create",
 					"style": {
-						"navigationBarTitleText": "个人资料",
-						"navigationBarTextStyle": "white",
+						"navigationBarTitleText": "填写订单"
+					}
+				},
+				{
+					"path": "detail/detail",
+					"style": {
+						"navigationBarTitleText": "订单详情",
 						"navigationStyle": "custom"
 					}
-				}
-			]
-		},
-		{
-			"root": "pagesMember/address",
-			"pages": [
+				},
 				{
-					"path": "address",
+					"path": "payment/payment",
 					"style": {
-						"navigationBarTitleText": "地址"
+						"navigationBarTitleText": "支付结果"
 					}
-				}
-			]
-		},
-		{
-			"root": "pagesMember/address-form",
-			"pages": [
+				},
 				{
-					"path": "address-form",
+					"path": "list/list",
 					"style": {
-						"navigationBarTitleText": "新建地址"
+						"navigationBarTitleText": "订单列表"
 					}
 				}
 			]
 		}
 	],
+	// 分包预下载规则
 	"preloadRule": {
 		"pages/my/my": {
 			"network": "all",
 			"packages": [
-				"pagesMember/settings",
-        "pagesMember/address"
+				"pagesMember",
+        "pagesOrder"
 			]
 		}
 	}

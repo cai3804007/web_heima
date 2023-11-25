@@ -76,7 +76,7 @@ const onScrollViewLower = async () => {
       v-show="activeIndex == index" @scrolltolower="onScrollViewLower">
       <view class="goods">
         <navigator hover-class="none" class="navigator" v-for="goods in item.goodsItems.items" :key="goods.id"
-          :url="`/pages/goods/goods?id=`">
+          :url="`/pages/goods/goods?id=${goods.id}`">
           <image class="thumb" :src="goods.picture"></image>
           <view class="name ellipsis">{{ goods.name }}</view>
           <view class="price">
