@@ -2,6 +2,7 @@
 import { getHomeGoodsGuessLikeAPI } from '@/services/home';
 import type { PageParams } from '@/types/global';
 import type { GuessItem } from '@/types/home';
+import { onLoad } from '@dcloudio/uni-app';
 import { onMounted, ref } from 'vue';
 const guessList = ref<GuessItem[]>([]);
 
@@ -21,12 +22,13 @@ const getHomeGoodsGuessLikeData = async () => {
     });
     return;
   }
-  pageParams.page++;
+
   const res = await getHomeGoodsGuessLikeAPI(pageParams);
   if (res.result.items.length < pageParams.pageSize) {
     finsh.value = true;
   }
-  console.log(res);
+  pageParams.page++;
+  console.log("猜你喜欢的数据======", res);
   guessList.value.push(...res.result.items);
 }
 
