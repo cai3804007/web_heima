@@ -24,7 +24,7 @@ const getCategoryData = async () => {
 onLoad(async () => {
   await Promise.all([getHomeBannerData(), getCategoryData()])
   dataFinsh.value = true;
-})
+}) 
 
 const subCategoryList = computed(() => {
   return categoryList.value[activeIndex.value]?.children || []

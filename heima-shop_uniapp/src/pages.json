@@ -21,7 +21,9 @@
 		{
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"navigationBarTextStyle": "white",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -93,5 +95,62 @@
 				"selectedIconPath": "static/tabs/user_selected.png"
 			}
 		]
+	},
+	"subPackages": [
+		{
+			"root": "pagesMember/settings",
+			"pages": [
+				{
+					"path": "settings",
+					"style": {
+						"navigationBarTitleText": "设置"
+					}
+				}
+			]
+		},
+		{
+			"root": "pagesMember/profile",
+			"pages": [
+				{
+					"path": "profile",
+					"style": {
+						"navigationBarTitleText": "个人资料",
+						"navigationBarTextStyle": "white",
+						"navigationStyle": "custom"
+					}
+				}
+			]
+		},
+		{
+			"root": "pagesMember/address",
+			"pages": [
+				{
+					"path": "address",
+					"style": {
+						"navigationBarTitleText": "地址"
+					}
+				}
+			]
+		},
+		{
+			"root": "pagesMember/address-form",
+			"pages": [
+				{
+					"path": "address-form",
+					"style": {
+						"navigationBarTitleText": "新建地址"
+					}
+				}
+			]
+		}
+	],
+	"preloadRule": {
+		"pages/my/my": {
+			"network": "all",
+			"packages": [
+				"pagesMember/settings",
+        "pagesMember/address"
+			]
+		}
 	}
 }
